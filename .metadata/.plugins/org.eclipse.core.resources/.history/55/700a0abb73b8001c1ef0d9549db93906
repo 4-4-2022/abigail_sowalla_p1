@@ -1,0 +1,18 @@
+package com.fishyfriends.Model;
+
+public class Animal extends Merchandise {
+	
+	// the species of the animal
+	private String species; 
+	// how difficult it is to keep this animal as a pet
+	private String difficulty;  
+	// can this animal be kept with other animals?
+	private boolean social;
+	// fresh water or salt water
+	private String waterType;
+	
+	public Animal(String species, String difficulty, boolean social, String waterType) {
+		super(price);
+	}
+
+}
