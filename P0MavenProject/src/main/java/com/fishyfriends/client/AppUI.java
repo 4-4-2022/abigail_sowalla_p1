@@ -3,6 +3,7 @@ package com.fishyfriends.client;
 //imports
 
 import com.fishyfriends.Model.Animal;
+import com.fishyfriends.Model.LoggedIn;
 import com.fishyfriends.repository.AnimalRepository;
 import com.fishyfriends.Driver;
 
@@ -21,17 +22,19 @@ public class AppUI {
 	}
 	
 	//decide which menu category to print
-	public static void printMenu(int flowStage, boolean isLoggedIn, boolean isEmployee, boolean isPrimary) {
+	public static void printMenu(int flowStage, boolean isEmployee, boolean isPrimary) {
 		if(flowStage==1) {
-			printMainMenu(isLoggedIn, isEmployee, isPrimary);
+			printMainMenu(isEmployee, isPrimary);
 		}else if(flowStage==2) {
 			catalogFlow();
 		}
 	}
 	
 	//welcome menu (logged out)
-	public static void printMainMenu(boolean isLoggedIn, boolean isEmployee, boolean isPrimary) {
-		if(isLoggedIn==true) {
+	public static void printMainMenu(boolean isEmployee, boolean isPrimary) {
+		//to decide which menu to show, the program needs to know whether the user is logged in, if they're a primary user, and if they're an employee.
+		LoggedIn amILoggedIn = LoggedIn.getInstance();
+		if(amILoggedIn.amILoggedIn()==true) {
 			if(isEmployee==false) {
 				if(isPrimary==true) {
 					printMainMenuInPC();
@@ -107,11 +110,18 @@ public class AppUI {
 		System.out.println("\n1) Add an animal to your cart");
 		System.out.println("2) Return to main menu");
 	}
+	
+	
+	/*
 	public static int changeFlowStage(int userSelection) {
 		if(userSelection==3) {
 			return 2;
+		}else if(userSelection==5) {
+			System.out.println("0 was returned");
+			return 0;
 		} else return 1;
 	}
+	*/
 	
 	public static int mainInSwitch(int userSelection, int flowStage) {
 		switch(userSelection) {
@@ -133,8 +143,8 @@ public class AppUI {
 			return flowStage;
 			//break;
 		case 5:
-			System.out.println("\033[3mSEA\033[0m you later. Thanks for swimming by!");
-			return flowStage;
+			System.out.println("Thanks for swimming by!");
+			return 0;
 			//break;
 		default: 
 			System.out.println("That's not an option. Go fish!");

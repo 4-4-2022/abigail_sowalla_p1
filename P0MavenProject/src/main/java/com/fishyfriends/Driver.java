@@ -38,6 +38,7 @@ import com.fishyfriends.Model.Animal;
 import com.fishyfriends.Model.User;
 import com.fishyfriends.client.AppUI;
 import com.fishyfriends.Model.Account;
+import com.fishyfriends.Model.LoggedIn;
 import com.fishyfriends.repository.AnimalRepository;
 
 //main method
@@ -49,13 +50,13 @@ public class Driver {
 		System.out.println("Welcome to Fishy Friends Aquarium Shop!\nWhat would you like to do?");
 		
 		//initialize variables to track user status
-		boolean isLoggedIn = false;
 		boolean isEmployee = false;
 		boolean isPrimary = false;
 		
 		/*
 		 * I'm using flowStage to tall me what part of the workflow the user is in.
 		 * 
+		 * flowstage 0 exits the program.
 		 * flowStage 1 is the main menu. 
 		 * flowStage 2 is the catalog menu.
 		 * 
@@ -71,7 +72,7 @@ public class Driver {
 		while(isUserInterested) {
 			
 			//welcome message
-			AppUI.printMenu(flowStage, isLoggedIn, isEmployee, isPrimary);
+			AppUI.printMenu(flowStage, isEmployee, isPrimary);
 			
 			//scan user input
 			int userSelection = scanner.nextInt();
@@ -79,30 +80,22 @@ public class Driver {
 			
 			//determine course of action based on user input
 			flowStage=AppUI.mainInSwitch(userSelection, flowStage);
-			//AppUI.ChooseSwitch(userSelection, flowStage, isUserInterested);
-			/*switch(userSelection) {
-			case 1: 
-				isLoggedIn = AppUI.logginInOut(isLoggedIn);
-				break;
-			case 2: 
-				System.out.println("Sorry, we don't have that feature yet.");
-				break;
-			case 3:
-				//AppUI.catalogFlow();
-				flowStage = AppUI.changeFlowStage(userSelection);
-				break;
-			case 4:
-				System.out.println("Dive into the fishtank of your dreams!\nFishy Friends provides aquarium enthusiasts with happy, healthy animals. We've hooked over 100 happy customers since 2021.");
-				break;
-			case 5:
-				System.out.println("\033[3mSEA\033[0m you later. Thanks for swimming by!");
-				break;
-			default: 
-				System.out.println("That's not an option. Go fish!");
-				
+			
+			//Instantiate Singleton "LoggedIn", then log in or log out.
+			if(userSelection==1) {
+				LoggedIn amILoggedIn = LoggedIn.getInstance();
+				amILoggedIn.logInOut();
 			}
-			*/
+			
+			//AppUI.ChooseSwitch(userSelection, flowStage);
+			
+			// check if user is still interested
+			if (flowStage==0) {
+				isUserInterested=false;
+			}
 		}
+		
+		//close scanner
 		scanner.close();
 		
 	}
