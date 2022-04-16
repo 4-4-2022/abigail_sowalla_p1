@@ -25,6 +25,7 @@ package com.fishyfriends;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 //import java features
@@ -42,56 +43,67 @@ import com.fishyfriends.repository.AnimalRepository;
 //main method
 
 public class Driver {
-	public static void main(String[] args) {
-
-		//connection to a database. Use environment variables for username, password, url
-		Connection conn = null;
-		try {
-		conn = DriverManager.getConnection(System.getenv("db_url"), 
-				System.getenv("db_username"), 
-				System.getenv("db_password")
-				);
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+	public static void main(String[] args) {		
 		
-		//fetch animal data
-		AnimalRepository animalRepository = new AnimalRepository();
-		Animal[] animals = animalRepository.listAllAnimals();
+		//initial welcome message
+		System.out.println("Welcome to Fishy Friends Aquarium Shop!\nWhat would you like to do?");
 		
-		//welcome message
-		AppUI.printMainMenu();
+		//initialize variables to track user status
+		boolean isLoggedIn = false;
+		boolean isEmployee = false;
+		boolean isPrimary = false;
 		
-		//open a scanner, scan user input, close scanner
+		/*
+		 * I'm using flowStage to tall me what part of the workflow the user is in.
+		 * 
+		 * flowStage 1 is the main menu. 
+		 * flowStage 2 is the catalog menu.
+		 * 
+		 * each flowStage points to a unique menu and switch statement.
+		 */
+		int flowStage = 1;
+		
+		//initialize a scanner with the scope of the main method
 		Scanner scanner = new Scanner(System.in);
-		int userSelection = scanner.nextInt();
-		scanner.close();
 		
-		//determine course of action based on user input
-		switch(userSelection) {
-		case 1: 
-			System.out.println("Sorry, we don't have that feature yet.");
-			break;
-		case 2: 
-			System.out.println("Sorry, we don't have that feature yet.");
-			break;
-		case 3:
-			AppUI.printCatalog(animals);
-			break;
-		case 4:
-			System.out.println("Dive into the fishtank of your dreams!\nFishy Friends provides aquarium enthusiasts with happy, healthy animals. We've hooked over 100 happy customers since 2021.");
-			break;
-		default: 
-			System.out.println("That's not an option. Go fish!");
+		//set program to continue after first input until user is no longer interested
+		boolean isUserInterested = true;
+		while(isUserInterested) {
 			
+			//welcome message
+			AppUI.printMenu(flowStage, isLoggedIn, isEmployee, isPrimary);
+			
+			//scan user input
+			int userSelection = scanner.nextInt();
+			scanner.nextLine();
+			
+			//determine course of action based on user input
+			flowStage=AppUI.mainInSwitch(userSelection, flowStage);
+			//AppUI.ChooseSwitch(userSelection, flowStage, isUserInterested);
+			/*switch(userSelection) {
+			case 1: 
+				isLoggedIn = AppUI.logginInOut(isLoggedIn);
+				break;
+			case 2: 
+				System.out.println("Sorry, we don't have that feature yet.");
+				break;
+			case 3:
+				//AppUI.catalogFlow();
+				flowStage = AppUI.changeFlowStage(userSelection);
+				break;
+			case 4:
+				System.out.println("Dive into the fishtank of your dreams!\nFishy Friends provides aquarium enthusiasts with happy, healthy animals. We've hooked over 100 happy customers since 2021.");
+				break;
+			case 5:
+				System.out.println("\033[3mSEA\033[0m you later. Thanks for swimming by!");
+				break;
+			default: 
+				System.out.println("That's not an option. Go fish!");
+				
+			}
+			*/
 		}
+		scanner.close();
 		
 	}
 }
