@@ -38,7 +38,8 @@ import com.fishyfriends.Model.Animal;
 import com.fishyfriends.Model.User;
 import com.fishyfriends.client.AppUI;
 import com.fishyfriends.Model.Account;
-import com.fishyfriends.Model.LoggedIn;
+import com.fishyfriends.Model.CurrentSession;
+import com.fishyfriends.Model.ProgramStage;
 import com.fishyfriends.repository.AnimalRepository;
 
 //main method
@@ -49,20 +50,8 @@ public class Driver {
 		//initial welcome message
 		System.out.println("Welcome to Fishy Friends Aquarium Shop!\nWhat would you like to do?");
 		
-		//initialize variables to track user status
-		boolean isEmployee = false;
-		boolean isPrimary = false;
-		
-		/*
-		 * I'm using flowStage to tall me what part of the workflow the user is in.
-		 * 
-		 * flowstage 0 exits the program.
-		 * flowStage 1 is the main menu. 
-		 * flowStage 2 is the catalog menu.
-		 * 
-		 * each flowStage points to a unique menu and switch statement.
-		 */
-		int flowStage = 1;
+		//I'm using ProgramStage to tall me what part of the workflow the user is in.
+		ProgramStage programStage = ProgramStage.getInstance();
 		
 		//initialize a scanner with the scope of the main method
 		Scanner scanner = new Scanner(System.in);
@@ -71,26 +60,20 @@ public class Driver {
 		boolean isUserInterested = true;
 		while(isUserInterested) {
 			
-			//welcome message
-			AppUI.printMenu(flowStage, isEmployee, isPrimary);
-			
+			//show user their options
+			AppUI.printMenu();
+
 			//scan user input
 			int userSelection = scanner.nextInt();
-			scanner.nextLine();
+			//scanner.nextLine();
+			
+			AppUI.chooseSwitch(userSelection);
 			
 			//determine course of action based on user input
-			flowStage=AppUI.mainInSwitch(userSelection, flowStage);
-			
-			//Instantiate Singleton "LoggedIn", then log in or log out.
-			if(userSelection==1) {
-				LoggedIn amILoggedIn = LoggedIn.getInstance();
-				amILoggedIn.logInOut();
-			}
-			
-			//AppUI.ChooseSwitch(userSelection, flowStage);
+			//AppUI.mainInSwitch(userSelection);
 			
 			// check if user is still interested
-			if (flowStage==0) {
+			if (programStage.returnsProgramStage()==0) {
 				isUserInterested=false;
 			}
 		}

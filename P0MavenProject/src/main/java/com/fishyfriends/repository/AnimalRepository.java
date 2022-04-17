@@ -7,6 +7,8 @@ public class AnimalRepository {
 	//create an array
 	public Animal[] animals = new Animal[10];
 	
+	
+	
 	//a constructor which adds objects to the array
 	public AnimalRepository() {
 		super();

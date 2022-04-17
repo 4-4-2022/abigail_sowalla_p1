@@ -26,6 +26,19 @@ public class Animal{
 		this.waterType = waterType;
 	}
 	
+public Animal(int id, String species, float price, String difficulty, boolean social, String waterType) {
+		
+		super();
+		
+		this.id = id;
+		this.species = species;
+		this.price = price;
+		this.difficulty = difficulty;
+		this.social = social;
+		this.waterType = waterType;
+	}
+	
+	
 	//set how Animals will be printed
 	@Override
 	public String toString() {
