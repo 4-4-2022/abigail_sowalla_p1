@@ -42,7 +42,7 @@ public Animal(int id, String species, float price, String difficulty, boolean so
 	//set how Animals will be printed
 	@Override
 	public String toString() {
-		return species + ". Price: " + price + ". Difficulty of Care: " + difficulty + ". Social: " + social + ". Water Type: " + waterType + ".";
+		return "ID#: " + id + ") " + species + ". Price: " + price + ". Difficulty of Care: " + difficulty + ". Social: " + social + ". Water Type: " + waterType + ".";
 	}
 
 }

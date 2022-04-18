@@ -1,16 +1,21 @@
 package com.fishyfriends.Model;
 
+import com.fishyfriends.client.AppUI;
+import com.fishyfriends.client.Flows; 
+
+import java.util.Scanner;
+
 //this Singleton will tell us whether the user is logged in, a primary user, or an employee. Note: Primary + Employee = Admin.
 
-public class CurrentSession {
+public class CurrentSession implements Flows{
 	private static CurrentSession instance;
 	private boolean isloggedIn;
 	private boolean isPrimary;
 	private boolean isEmployee;
 	private CurrentSession() {
 		isloggedIn = false;
-		isPrimary = false;
-		isEmployee = false;
+		isPrimary = true;
+		isEmployee = true;
 	}
 	
 	//This method creates an instance of the Singleton.
@@ -21,12 +26,12 @@ public class CurrentSession {
 	}
 	
 	//this method is called to change whether the user is logged in or out.
-	public void logInOut() {
+	public void logInOut(Scanner scanner) {
 		if(isloggedIn==true) {
 			System.out.println("SEA you later!");
 			isloggedIn=false;
 		}else {
-			System.out.println("Welcome back!");
+			Flows.loginFlow(scanner);
 			isloggedIn=true;
 		}
 	}

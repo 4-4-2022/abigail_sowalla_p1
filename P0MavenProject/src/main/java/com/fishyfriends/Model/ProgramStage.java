@@ -1,6 +1,24 @@
 package com.fishyfriends.Model;
 
-//this Singleton will track what stage of the program's flow the user is in.
+/*this Singleton will track what stage of the program's flow the user is in.
+ * 
+ * programStage:
+ * 1: Main Menu
+ * 2: Viewing Catalog
+ * 3: Logging In
+ * 4: Creating an Account
+ * 5: Ordering an Animal
+ * 6: Manage Funds
+ * 7: Add Funds
+ * 8: Transfer Funds
+ * 9: Remove Funds
+ * 10: Viewing Account Info
+ * 11: Changing Account Info
+ * 12: Managing Accounts
+ * 13: Add an account
+ * 14: Remove an Account
+ * 
+ */
 
 public class ProgramStage {
 	private static ProgramStage instance;

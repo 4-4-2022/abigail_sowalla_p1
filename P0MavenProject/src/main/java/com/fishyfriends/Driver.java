@@ -31,6 +31,7 @@ import java.sql.SQLException;
 //import java features
 
 import java.util.Scanner;
+import java.util.Set;
 
 //import classes
 
@@ -41,11 +42,14 @@ import com.fishyfriends.Model.Account;
 import com.fishyfriends.Model.CurrentSession;
 import com.fishyfriends.Model.ProgramStage;
 import com.fishyfriends.repository.AnimalRepository;
+import com.fishyfriends.repository.AnimalDAO;
 
 //main method
 
 public class Driver {
 	public static void main(String[] args) {		
+		
+		
 		
 		//initial welcome message
 		System.out.println("Welcome to Fishy Friends Aquarium Shop!\nWhat would you like to do?");
@@ -55,19 +59,20 @@ public class Driver {
 		
 		//initialize a scanner with the scope of the main method
 		Scanner scanner = new Scanner(System.in);
-		
+		int userSelection;
 		//set program to continue after first input until user is no longer interested
 		boolean isUserInterested = true;
+		
 		while(isUserInterested) {
 			
 			//show user their options
 			AppUI.printMenu();
 
 			//scan user input
-			int userSelection = scanner.nextInt();
+			userSelection = scanner.nextInt();
 			//scanner.nextLine();
 			
-			AppUI.chooseSwitch(userSelection);
+			AppUI.chooseSwitch(userSelection, scanner);
 			
 			//determine course of action based on user input
 			//AppUI.mainInSwitch(userSelection);
