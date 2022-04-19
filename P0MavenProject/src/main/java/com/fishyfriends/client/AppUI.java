@@ -6,7 +6,7 @@ import com.fishyfriends.Model.Animal;
 import com.fishyfriends.Model.CurrentSession;
 import com.fishyfriends.Model.ProgramStage;
 import com.fishyfriends.repository.AnimalDAO;
-import com.fishyfriends.repository.AnimalRepository;
+//import com.fishyfriends.repository.AnimalRepository;
 
 import java.util.Scanner;
 
@@ -88,8 +88,8 @@ public class AppUI implements Menus, Switches, Flows{
 	public static void catalogMenu() {
 
 		//fetch animal data
-		AnimalRepository animalRepository = new AnimalRepository();
-		Animal[] animals = animalRepository.listAllAnimals();
+		//AnimalRepository animalRepository = new AnimalRepository();
+		//Animal[] animals = animalRepository.listAllAnimals();
 		
 		//print the catalog
 		//printCatalog(animals);

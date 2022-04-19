@@ -41,7 +41,7 @@ import com.fishyfriends.client.AppUI;
 import com.fishyfriends.Model.Account;
 import com.fishyfriends.Model.CurrentSession;
 import com.fishyfriends.Model.ProgramStage;
-import com.fishyfriends.repository.AnimalRepository;
+//import com.fishyfriends.repository.AnimalRepository;
 import com.fishyfriends.repository.AnimalDAO;
 
 //main method

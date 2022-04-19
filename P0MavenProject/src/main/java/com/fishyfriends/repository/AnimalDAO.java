@@ -6,9 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import com.fishyfriends.util.ConnectionFactory;
 import com.fishyfriends.util.ResourceCloser;
@@ -74,9 +71,8 @@ public class AnimalDAO {
 	}
 	
 	//to add an animal:
-	public static void addAnimal(String name, String difficulty, boolean isSocial, String waterType, float price) {
+	public static void addAnimal(int id, String name, String difficulty, boolean isSocial, String waterType, float price) {
 		
-		int id = 14;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		final String SQL = "insert into animals values(?,?,?,?,?,?)";
@@ -91,18 +87,9 @@ public class AnimalDAO {
 			stmt.setString(5,waterType);
 			stmt.setFloat(6,price);
 			stmt.execute();
-			
-			//code to add an animal
-			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
-			/*try {
-				conn.close();
-				stmt.close();
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}*/
 			ResourceCloser.closeConnection(conn);
 			ResourceCloser.closeStatement(stmt);
 		}
@@ -226,6 +213,29 @@ public class AnimalDAO {
 			ResourceCloser.closeConnection(conn);
 			ResourceCloser.closeStatement(stmt);
 		}
+	}
+	
+	public static float getAnimalPrice(int id) {
+		
+		float price=0;
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet set = null;
+		final String SQL = "select animal_price from animals where animal_id="+id;
+		
+		try {
+			conn = ConnectionFactory.getConnection();
+			stmt = conn.createStatement();
+			set = stmt.executeQuery(SQL);
+			set.next();
+			price = set.getFloat(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			ResourceCloser.closeConnection(conn);
+			ResourceCloser.closeStatement(stmt);
+		}
+		 return price;
 	}
 	
 }

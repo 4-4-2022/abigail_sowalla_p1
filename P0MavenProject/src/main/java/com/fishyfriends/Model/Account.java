@@ -13,4 +13,10 @@ public class Account {
 		this.accountName = accountName;
 		this.accountBalance = accountBalance;
 	}
+	
+	//set how accounts will be printed
+	@Override
+	public String toString() {
+		return "ID#: " + accountID + ") Account name: " + accountName + ". Balance: " + accountBalance + ".";
+	}
 }

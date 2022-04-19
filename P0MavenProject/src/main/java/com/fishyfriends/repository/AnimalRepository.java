@@ -4,7 +4,7 @@ import java.util.Set;
 
 import com.fishyfriends.Model.Animal;
 
-public class AnimalRepository {
+/*public class AnimalRepository {
 	
 	//create an array
 	public Animal[] animals = new Animal[10];
@@ -29,4 +29,4 @@ public class AnimalRepository {
 	public Animal[] listAllAnimals() {
 		return this.animals;
 	}
-}
+}*/

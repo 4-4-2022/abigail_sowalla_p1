@@ -15,7 +15,7 @@ public class CurrentSession implements Flows{
 	private CurrentSession() {
 		isloggedIn = false;
 		isPrimary = true;
-		isEmployee = true;
+		isEmployee = false;
 	}
 	
 	//This method creates an instance of the Singleton.
