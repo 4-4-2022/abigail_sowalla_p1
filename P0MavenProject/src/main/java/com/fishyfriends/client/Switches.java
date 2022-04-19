@@ -2,7 +2,9 @@ package com.fishyfriends.client;
 
 import com.fishyfriends.Model.CurrentSession;
 import com.fishyfriends.Model.ProgramStage;
+import com.fishyfriends.Model.User;
 import com.fishyfriends.client.Flows;
+import com.fishyfriends.repository.UserDAO;
 
 import java.util.Scanner;
 
@@ -69,7 +71,10 @@ public interface Switches extends Flows{
 			Flows.manageUsersFlow(scanner);
 			break;
 		case 6:
-			//add a method to print account info
+			CurrentSession currentSession = CurrentSession.getInstance();
+			String username = currentSession.myUsername();
+			User currentUser = UserDAO.getCurrentUser(username);
+			User.printUserInfo(currentUser);
 			System.out.println("\n1) Return to main menu\n2) Edit your account info");
 			int nextAccountStep = scanner.nextInt();
 			if(nextAccountStep==1) {

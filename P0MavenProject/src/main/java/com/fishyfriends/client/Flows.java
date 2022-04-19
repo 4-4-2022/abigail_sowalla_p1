@@ -3,21 +3,30 @@ package com.fishyfriends.client;
 import java.util.Scanner;
 
 import com.fishyfriends.repository.AnimalDAO;
+import com.fishyfriends.Model.User;
 import com.fishyfriends.repository.AccountDAO;
 import com.fishyfriends.repository.UserDAO;
+import com.fishyfriends.Model.CurrentSession;
 
 public interface Flows {
 	public static void loginFlow(Scanner scanner) {
 		System.out.println("Enter your username:");
 		scanner.nextLine();
 		String username = scanner.nextLine();
+		User currentUser = UserDAO.getCurrentUser(username);
 		System.out.println("Enter your Password:");
 		String password = scanner.nextLine();
-		//retrieve password associated with username.
-		//if password = retrievedPassword,
-		//send account data to CurrentSession
-		System.out.println("Welcome back, "+username+"!");
-		//else print "Your login info was incorrect."
+		if(password.equals(currentUser.password)) {
+			//send account data to CurrentSession
+			CurrentSession amILoggedIn = CurrentSession.getInstance();
+			amILoggedIn.logIn();
+			amILoggedIn.employeeStatus(currentUser.isEmployee);
+			amILoggedIn.primaryStatus(currentUser.isPrimary);
+			amILoggedIn.nameStatus(username);
+			System.out.println("Welcome back, "+username+"!");
+		} else {
+		System.out.println("The login info you entered was incorrect.");
+		}
 	}
 	
 	public static void createAccountFlow(Scanner scanner) {
@@ -165,6 +174,8 @@ public interface Flows {
 	}
 	
 	public static void editMyAccountFlow(Scanner scanner) {
+		CurrentSession currentSession = CurrentSession.getInstance();
+		String username=currentSession.myUsername();
 		System.out.println("Which info do you wish to edit?\n\n1) Username\n2) Password\n3) email\n4) Birthday\n5) Address");
 		scanner.nextLine();
 		int choose = scanner.nextInt();
@@ -172,21 +183,26 @@ public interface Flows {
 			scanner.nextLine();
 			System.out.println("Type your new username.");
 			String newUserName = scanner.nextLine();
+			UserDAO.editUserName(username, newUserName);
+			currentSession.nameStatus(newUserName);
 			System.out.println("Your username is now "+newUserName+"!\n");
 		}else if (choose==2) {
 			scanner.nextLine();
 			System.out.println("Type your new password.");
 			String newUserPassword = scanner.nextLine();
+			UserDAO.editUserPassword(username, newUserPassword);
 			System.out.println("Your password is now "+newUserPassword+"!\n");
 		}else if (choose==3) {
 			scanner.nextLine();
 			System.out.println("Type your new email.");
 			String newUserEmail = scanner.nextLine();
+			UserDAO.editUserEmail(username, newUserEmail);
 			System.out.println("Your email is now "+newUserEmail+"!\n");
 		}else if (choose==4) {
 			scanner.nextLine();
 			System.out.println("Enter your birthday (MMDDYYY).");
 			int newUserBday = scanner.nextInt();
+			UserDAO.editUserBirthday(username, newUserBday);
 			System.out.println("Your birthday has been updated!\n");
 		}else if (choose==5) {
 			scanner.nextLine();
@@ -197,7 +213,8 @@ public interface Flows {
 			System.out.println("Enter your state.");
 			String state = scanner.nextLine();
 			System.out.println("Enter your ZIP.");
-			String zip = scanner.nextLine();
+			int zip = scanner.nextInt();
+			UserDAO.editUserAddress(username, street, city, state, zip);
 			System.out.println("Your address has been updated!\n");
 		}
 	}

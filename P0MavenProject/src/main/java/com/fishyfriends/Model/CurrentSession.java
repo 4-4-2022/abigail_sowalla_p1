@@ -12,10 +12,12 @@ public class CurrentSession implements Flows{
 	private boolean isloggedIn;
 	private boolean isPrimary;
 	private boolean isEmployee;
+	private String username;
 	private CurrentSession() {
 		isloggedIn = false;
-		isPrimary = true;
+		isPrimary = false;
 		isEmployee = false;
+		username=null;
 	}
 	
 	//This method creates an instance of the Singleton.
@@ -32,8 +34,11 @@ public class CurrentSession implements Flows{
 			isloggedIn=false;
 		}else {
 			Flows.loginFlow(scanner);
-			isloggedIn=true;
 		}
+	}
+	
+	public void logIn() {
+		isloggedIn=true;
 	}
 	
 	//this method is used to set if the current user is an employee.
@@ -43,6 +48,10 @@ public class CurrentSession implements Flows{
 	
 	public void primaryStatus(boolean status) {
 		isPrimary=status;
+	}
+	
+	public void nameStatus(String status) {
+		username=status;
 	}
 	
 	//this method returns true when the user is logged in and false when the user is logged out.
@@ -56,5 +65,9 @@ public class CurrentSession implements Flows{
 	
 	public boolean amIEmployee() {
 		return this.isEmployee;
+	}
+	
+	public String myUsername() {
+		return this.username;
 	}
 }

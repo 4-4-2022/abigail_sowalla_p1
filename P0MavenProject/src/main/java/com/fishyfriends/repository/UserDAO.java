@@ -123,6 +123,52 @@ public class UserDAO {
 			return usersID;
 		}
 		
+		//retrieve user info when a user logs in
+		public static User getCurrentUser(String userName){
+			
+			User currentUser = new User(userName);
+			
+			Connection conn = null;
+			Statement stmt = null;
+			ResultSet set = null;
+			final String SQL = "select * from users where user_name='"+userName+"'";
+			
+			try {
+				conn = ConnectionFactory.getConnection();
+				stmt = conn.createStatement();
+				set = stmt.executeQuery(SQL);
+				
+				set.next();
+				
+				currentUser.userAccountId=set.getInt(1);
+				currentUser.password=set.getString(3);
+				currentUser.isPrimary=set.getBoolean(4);
+				currentUser.street=set.getString(5);
+				currentUser.city=set.getString(6);
+				currentUser.state=set.getString(7);
+				currentUser.zip=set.getInt(8);
+				currentUser.email=set.getString(9);
+				currentUser.birthday=set.getInt(10);
+				currentUser.isEmployee=set.getBoolean(11);
+				currentUser.isAdmin=set.getBoolean(12);
+
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					conn.close();
+					stmt.close();
+					set.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+				ResourceCloser.closeConnection(conn);
+				ResourceCloser.closeResultSet(set);
+				ResourceCloser.closeStatement(stmt);
+			}
+			return currentUser;
+		}
+		
 		public static void addUser(String name, int id, String password, boolean isPrimary, String street, String city, String state, int zip, String email, int birthday, boolean isEmployee, boolean isAdmin) {
 			
 			Connection conn = null;
@@ -215,6 +261,109 @@ public class UserDAO {
 				stmt.setString(1,userName);
 				stmt.execute();
 				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				ResourceCloser.closeConnection(conn);
+				ResourceCloser.closeStatement(stmt);
+			}
+		}
+		
+		public static void editUserName(String oldName, String newName) {
+			
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			final String SQL = "update users set user_name = ? where user_name=?";
+			
+			try {
+				conn = ConnectionFactory.getConnection();
+				stmt = conn.prepareStatement(SQL);
+				stmt.setString(1,newName);
+				stmt.setString(2,oldName);
+				stmt.execute();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				ResourceCloser.closeConnection(conn);
+				ResourceCloser.closeStatement(stmt);
+			}
+		}
+		
+		public static void editUserPassword(String oldName, String newPassword) {
+			
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			final String SQL = "update users set user_password = ? where user_name=?";
+			
+			try {
+				conn = ConnectionFactory.getConnection();
+				stmt = conn.prepareStatement(SQL);
+				stmt.setString(1,newPassword);
+				stmt.setString(2,oldName);
+				stmt.execute();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				ResourceCloser.closeConnection(conn);
+				ResourceCloser.closeStatement(stmt);
+			}
+		}
+		
+		public static void editUserEmail(String oldName, String newEmail) {
+			
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			final String SQL = "update users set user_email = ? where user_name=?";
+			
+			try {
+				conn = ConnectionFactory.getConnection();
+				stmt = conn.prepareStatement(SQL);
+				stmt.setString(1,newEmail);
+				stmt.setString(2,oldName);
+				stmt.execute();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				ResourceCloser.closeConnection(conn);
+				ResourceCloser.closeStatement(stmt);
+			}
+		}
+		
+		public static void editUserBirthday(String oldName, int newBday) {
+			
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			final String SQL = "update users set user_birthday = ? where user_name=?";
+			
+			try {
+				conn = ConnectionFactory.getConnection();
+				stmt = conn.prepareStatement(SQL);
+				stmt.setInt(1,newBday);
+				stmt.setString(2,oldName);
+				stmt.execute();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				ResourceCloser.closeConnection(conn);
+				ResourceCloser.closeStatement(stmt);
+			}
+		}
+		
+		public static void editUserAddress(String oldName, String street, String city, String state, int zip) {
+			
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			final String SQL = "update users set user_street = ?, user_city = ?, user_state = ?, user_zip = ? where user_name=?";
+			
+			try {
+				conn = ConnectionFactory.getConnection();
+				stmt = conn.prepareStatement(SQL);
+				stmt.setString(1,street);
+				stmt.setString(2,city);
+				stmt.setString(3,state);
+				stmt.setInt(4,zip);
+				stmt.setString(5,oldName);
+				stmt.execute();
 			}catch(SQLException e) {
 				e.printStackTrace();
 			}finally {
