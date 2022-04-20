@@ -23,26 +23,11 @@
 
 package com.fishyfriends;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-//import java features
-
 import java.util.Scanner;
-import java.util.Set;
 
-//import classes
-
-import com.fishyfriends.Model.Animal;
-import com.fishyfriends.Model.User;
 import com.fishyfriends.client.AppUI;
-import com.fishyfriends.Model.Account;
-import com.fishyfriends.Model.CurrentSession;
+
 import com.fishyfriends.Model.ProgramStage;
-//import com.fishyfriends.repository.AnimalRepository;
-import com.fishyfriends.repository.AnimalDAO;
 
 //main method
 

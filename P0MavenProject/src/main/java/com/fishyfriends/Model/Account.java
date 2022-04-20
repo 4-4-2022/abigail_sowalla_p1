@@ -6,7 +6,7 @@ public class Account {
 	public String accountName;
 	public float accountBalance;
 	
-	public Account(int accountId, String accountName, float accountBalance) {
+	public Account(int accountID, String accountName, float accountBalance) {
 		super();
 		
 		this.accountID = accountID;

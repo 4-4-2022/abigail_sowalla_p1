@@ -42,15 +42,15 @@ public class CurrentSession implements Flows{
 	}
 	
 	//this method is used to set if the current user is an employee.
-	public void employeeStatus(boolean status) {
+	public void setIsEmployee(boolean status) {
 		isEmployee=status;
 	}
 	
-	public void primaryStatus(boolean status) {
+	public void setIsPrimary(boolean status) {
 		isPrimary=status;
 	}
 	
-	public void nameStatus(String status) {
+	public void setName(String status) {
 		username=status;
 	}
 	

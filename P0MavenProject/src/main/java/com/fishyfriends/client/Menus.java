@@ -35,12 +35,22 @@ public interface Menus {
 				+ "\n\nType a number to continue.");
 	}
 		
-	//main menu (logged in, Employee)
-	public static void printMainMenuInE() {
+	//main menu (logged in, Admin)
+	public static void printMainMenuInA() {
 		System.out.println("\n1) Log out"
 				+ "\n2) View & Edit Catalog"
 				+ "\n3) View & Edit Accounts"
-				+ "\n4) Exit Fishy Friends"
+				+ "\n4) View & Edit Users"
+				+ "\n5) Exit Fishy Friends"
 				+ "\n\nType a number to continue.");
 	}
+	
+	//main menu (logged in, Employee)
+		public static void printMainMenuInE() {
+			System.out.println("\n1) Log out"
+					+ "\n2) View & Edit Catalog"
+					+ "\n3) View & Edit Accounts"
+					+ "\n4) Exit Fishy Friends"
+					+ "\n\nType a number to continue.");
+		}
 }

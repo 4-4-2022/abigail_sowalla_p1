@@ -172,5 +172,30 @@ public class AccountDAO {
 		}
 		 return balance;
 	}
+	
+	public static int getAccountID(String username) {
 		
+		int id=0;
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet set = null;
+		final String SQL = "select user_account_id from users where user_name='"+username+"'";
+		
+		try {
+			conn = ConnectionFactory.getConnection();
+			stmt = conn.createStatement();
+			set = stmt.executeQuery(SQL);
+			set.next();
+			id = set.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			ResourceCloser.closeConnection(conn);
+			ResourceCloser.closeStatement(stmt);
+		}
+		 return id;
+	}
+	
+	
+	
 }

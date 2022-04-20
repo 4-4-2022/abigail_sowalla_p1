@@ -7,12 +7,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.fishyfriends.util.ConnectionFactory;
 import com.fishyfriends.util.ResourceCloser;
 import com.fishyfriends.Model.Animal;
 import com.fishyfriends.Model.User;
+import com.fishyfriends.client.AppUI;
+import com.fishyfriends.client.Flows;
 
 public class UserDAO {
+	
+	final static Logger logger = LoggerFactory.getLogger(Flows.class);
 	
 	private static UserDAO userList;
 	
@@ -76,7 +83,7 @@ public class UserDAO {
 		
 		public static ArrayList<User> findUsersByID(){
 			
-			int userID = 3;
+			int userID = AppUI.getUsersID();
 			
 			ArrayList<User> usersID = new ArrayList<>();
 			
@@ -192,7 +199,8 @@ public class UserDAO {
 				stmt.setBoolean(12,isAdmin);
 				stmt.execute();
 			}catch(SQLException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("Sorry, that username was already taken. Please try again.");
 			}finally {
 				ResourceCloser.closeConnection(conn);
 				ResourceCloser.closeStatement(stmt);
@@ -221,8 +229,11 @@ public class UserDAO {
 				stmt.setBoolean(11,false);
 				stmt.setBoolean(12,false);
 				stmt.execute();
+				System.out.println(name+" has been added!\n");
+				logger.info("New user added to account #"+id);
 			}catch(SQLException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("Sorry, that username was already taken. Please try again.");
 			}finally {
 				ResourceCloser.closeConnection(conn);
 				ResourceCloser.closeStatement(stmt);
@@ -260,9 +271,10 @@ public class UserDAO {
 				stmt = conn.prepareStatement(SQL);
 				stmt.setString(1,userName);
 				stmt.execute();
-				
+				logger.info(userName+" has been removed.");
+				System.out.println(userName+" has been removed!\n");
 			}catch(SQLException e) {
-				e.printStackTrace();
+				System.out.println("Sorry, we couldn't find that user. Double-check that you have the correct username.");
 			}finally {
 				ResourceCloser.closeConnection(conn);
 				ResourceCloser.closeStatement(stmt);

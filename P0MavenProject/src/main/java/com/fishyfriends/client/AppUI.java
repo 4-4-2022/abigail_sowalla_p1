@@ -5,6 +5,7 @@ package com.fishyfriends.client;
 import com.fishyfriends.Model.Animal;
 import com.fishyfriends.Model.CurrentSession;
 import com.fishyfriends.Model.ProgramStage;
+import com.fishyfriends.repository.AccountDAO;
 import com.fishyfriends.repository.AnimalDAO;
 //import com.fishyfriends.repository.AnimalRepository;
 
@@ -54,6 +55,9 @@ public class AppUI implements Menus, Switches, Flows{
 				}else
 					Menus.printMainMenuInSC();
 			}else {
+				if(currentSession.amIPrimary()==true) {
+					Menus.printMainMenuInA();
+				}else
 				Menus.printMainMenuInE();
 			}
 		}else {
@@ -70,7 +74,10 @@ public class AppUI implements Menus, Switches, Flows{
 				}else
 					Switches.switchMainInSC(userSelection, scanner);
 			}else {
-				Switches.switchMainInE(userSelection, scanner);
+				if(currentSession.amIPrimary()==true) {
+					Switches.switchMainInA(userSelection, scanner);
+				}else
+					Switches.switchMainInE(userSelection, scanner);
 			}
 		}else {
 			Switches.switchMainOut(userSelection, scanner);
@@ -101,8 +108,35 @@ public class AppUI implements Menus, Switches, Flows{
 		System.out.println("2) Return to main menu");
 	}
 	
+	public static int verify1to(int userSelection, Scanner scanner, int max) {
+		while(userSelection<1 | userSelection>max) {
+			System.out.println("Invalid choice. Type a number between 1 and "+max+".");
+			userSelection = scanner.nextInt();
+		}
+		return userSelection;
+	}
+	
+	public static float verifyPositive(float userSelection, Scanner scanner) {
+		while(userSelection<0) {
+			System.out.println("Invalid choice. Enter a positive value.");
+			userSelection = scanner.nextInt();
+		}
+		return userSelection;
+	}
+	
+	public static int verifyInBudget(float price, int userSelection, float balance, Scanner scanner) {
+		while(userSelection*price>balance) {
+			System.out.println("You don't have enough funds. Your balance is "+balance+". Choose a smaller amount or type 0.");
+			userSelection = scanner.nextInt();
+		}
+		return userSelection;
+	}
+	
+	
+	
 	public static void catalogSwitch(int userSelection, Scanner scanner) {
 		CurrentSession currentSession = CurrentSession.getInstance();	
+		userSelection=verify1to(userSelection, scanner, 2);
 		if(userSelection==1) {
 			if(currentSession.amILoggedIn()==true) {
 				Flows.purchaseFlow(scanner);
@@ -128,6 +162,23 @@ public class AppUI implements Menus, Switches, Flows{
 				System.out.println(o);
 			}
 		}else System.out.println(item);
+	}
+	
+	//to get the balance of the user logged in
+	public static float getUsersBalance() {
+		CurrentSession currentsession=CurrentSession.getInstance();
+		String user = currentsession.myUsername();
+		int accountID= AccountDAO.getAccountID(user);
+		float balance = AccountDAO.getAccountBalance(accountID);
+		return balance;
+	}
+	
+	//to get the account ID of the user currently logged in
+	public static int getUsersID() {
+		CurrentSession currentsession=CurrentSession.getInstance();
+		String user = currentsession.myUsername();
+		int accountID= AccountDAO.getAccountID(user);
+		return accountID;
 	}
 
 }

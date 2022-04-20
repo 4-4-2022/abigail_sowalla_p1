@@ -26,7 +26,7 @@ public class Animal{
 		this.waterType = waterType;
 	}
 	
-public Animal(int id, String species, float price, String difficulty, boolean social, String waterType) {
+	public Animal(int id, String species, float price, String difficulty, boolean social, String waterType) {
 		
 		super();
 		

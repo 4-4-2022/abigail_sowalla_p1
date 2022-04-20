@@ -1,5 +1,7 @@
 package com.fishyfriends.Model;
 
+import com.fishyfriends.client.AppUI;
+
 public class User {
 	public String userName;
 	public int userAccountId;
@@ -52,12 +54,14 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "Username: " + userName;
+		return "Username: " + userName + ". Email: "+email+". Birthday: "+birthday+". \n     Address: "+street+", "+city+", "+state+" "+zip;
 	}
 	
 	public static void printUserInfo(User user) {
+		int id = AppUI.getUsersID();
 		System.out.println(
-				"Username: "+user.userName+
+				"Account ID: #"+id+
+				"\nUsername: "+user.userName+
 				"\nPassword: "+user.password+
 				"\nEmail: "+user.email+
 				"\nBirthday: "+user.birthday+
