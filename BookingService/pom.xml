@@ -9,37 +9,30 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.EEStudyAbroad</groupId>
-	<artifactId>BookTrip</artifactId>
+	<artifactId>BookingService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>BookTrip</name>
-	<description>Enlightening Escapades Study Abroad Service&apos;s Booking Platform.</description>
+	<name>BookingService</name>
+	<description>EE Study Abroad Service&apos;s Trip Browsing Service.</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-spring-boot-starter-jaxws -->
-		<dependency>
-		    <groupId>org.apache.cxf</groupId>
-		    <artifactId>cxf-spring-boot-starter-jaxws</artifactId>
-		    <version>3.5.2</version>
-		</dependency>
-		
 	</dependencies>
 
 	<build>

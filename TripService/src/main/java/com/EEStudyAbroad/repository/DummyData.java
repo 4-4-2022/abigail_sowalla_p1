@@ -5,17 +5,17 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.EEStudyAbroad.entities.SpringTrip;
+import com.EEStudyAbroad.models.Trip;
 
 @Component
 public class DummyData {
 
-	public List<SpringTrip> springTrip;
+	public List<Trip> trip;
 	
 	public DummyData() {
-		springTrip=new ArrayList<>();
-		springTrip.add(new SpringTrip(1, "Rome Romp", "Italy"));
-		springTrip.add(new SpringTrip(2, "Buenos Aires Adventure", "Argentina"));
+		trip=new ArrayList<>();
+		trip.add(new Trip(1, "Rome Romp", "Italy"));
+		trip.add(new Trip(2, "Buenos Aires Adventure", "Argentina"));
 	}
 	
 }

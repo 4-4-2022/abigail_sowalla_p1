@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.EEStudyAbroad.entities.SpringTrip;
 import com.EEStudyAbroad.models.Trip;
 import com.EEStudyAbroad.repository.DummyData;
 
@@ -20,17 +19,26 @@ public class TripService {
 	}
 	
 	public Trip getTrip(long id) {
-		List<SpringTrip> springTrips = dummyData.springTrip;
-		for(SpringTrip springTrip : springTrips) {
-			if(springTrip.getId() == id) {
-				return convertToTrip(springTrip);
+		List<Trip> trips = dummyData.trip;
+		for(Trip trip : trips) {
+			if(trip.getId() == id) {
+				return trip;
 			}
 		}
 		return null;
 	}
 
+	public Trip createTrip(Trip trip) {
+		// TODO Auto-generated method stub
+		dummyData.trip.add(new Trip(dummyData.trip.size()+1, trip.getName(), trip.getDescription()));
+		
+		return trip;
+	}
+	
+	//example of a method to convert one object type to another
+	/*
 	private Trip convertToTrip(SpringTrip springTrip) {
 		return new Trip(springTrip.getId(), springTrip.getName(), springTrip.getCountry());
 	}
-	
+	*/
 }
