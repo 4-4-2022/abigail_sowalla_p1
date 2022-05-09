@@ -14,9 +14,9 @@ public class BookingData {
 	
 	public BookingData() {
 		booking=new ArrayList<>();
-		booking.add(new Booking(1, "Bob Ross", 1, 05042022));
-		booking.add(new Booking(2, "James Bond", 2, 05042022));
-		booking.add(new Booking(3, "Indiana Jones", 2, 05042022));
+		booking.add(new Booking(1, "Bob Ross", 1, 05042022, 06162022));
+		booking.add(new Booking(2, "James Bond", 2, 05042022, 07172022));
+		booking.add(new Booking(3, "Indiana Jones", 2, 05042022, 06262022));
 	}
 	
 }

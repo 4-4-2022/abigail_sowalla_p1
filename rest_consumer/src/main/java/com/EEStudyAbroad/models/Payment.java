@@ -1,3 +1,4 @@
+
 package com.EEStudyAbroad.models;
 
 import java.util.Objects;
@@ -8,43 +9,55 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Payment {
 	
 	private long bookingId;
-	private double amountDue;
-	private long dueDate;
-	public Payment(long bookingId, double amountDue, long dueDate) {
-		super();
-		this.bookingId = bookingId;
-		this.amountDue = amountDue;
-		this.dueDate = dueDate;
-	}
-	public Payment() {
-		super();
-	}
+	private double amountPaid;
+	private long date;
+
 	public long getBookingId() {
 		return bookingId;
 	}
+
 	public void setBookingId(long bookingId) {
 		this.bookingId = bookingId;
 	}
-	public double getAmountDue() {
-		return amountDue;
+
+	public double getAmountPaid() {
+		return amountPaid;
 	}
-	public void setAmountDue(double amountDue) {
-		this.amountDue = amountDue;
+
+	public void setAmountPaid(double amountPaid) {
+		this.amountPaid = amountPaid;
 	}
-	public long getDueDate() {
-		return dueDate;
+
+	public long getDate() {
+		return date;
 	}
-	public void setDueDate(long dueDate) {
-		this.dueDate = dueDate;
+
+	public void setDate(long date) {
+		this.date = date;
 	}
+	
+	
+	public Payment() {
+		super();
+	}
+
+	public Payment(long bookingId, double amountPaid, long date) {
+		super();
+		this.bookingId = bookingId;
+		this.amountPaid = amountPaid;
+		this.date = date;
+	}
+
 	@Override
 	public String toString() {
-		return "Payment [bookingId=" + bookingId + ", amountDue=" + amountDue + ", dueDate=" + dueDate + "]";
+		return "Payment [bookingId=" + bookingId + ", amountPaid=" + amountPaid + ", date=" + date + "]";
 	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(amountDue, bookingId, dueDate);
+		return Objects.hash(amountPaid, bookingId, date);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -54,8 +67,9 @@ public class Payment {
 		if (getClass() != obj.getClass())
 			return false;
 		Payment other = (Payment) obj;
-		return Double.doubleToLongBits(amountDue) == Double.doubleToLongBits(other.amountDue)
-				&& bookingId == other.bookingId && dueDate == other.dueDate;
+		return Double.doubleToLongBits(amountPaid) == Double.doubleToLongBits(other.amountPaid)
+				&& bookingId == other.bookingId && date == other.date;
 	}
+
 	
 }

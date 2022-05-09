@@ -16,24 +16,11 @@ public class Payment {
 	@Column(name="booking_id")
 	private long bookingId;
 	
-	@Column(name="amount_due")
-	private double amountDue;
+	@Column(name="amount_paid")
+	private double amountPaid;
 	
-	@Column(name="due_date")
-	private long dueDate;
-
-	
-	
-	public Payment() {
-		super();
-	}
-
-	public Payment(long bookingId, double amountDue, long dueDate) {
-		super();
-		this.bookingId = bookingId;
-		this.amountDue = amountDue;
-		this.dueDate = dueDate;
-	}
+	@Column(name="payment_date")
+	private long date;
 
 	public long getBookingId() {
 		return bookingId;
@@ -43,25 +30,42 @@ public class Payment {
 		this.bookingId = bookingId;
 	}
 
-	public double getAmountDue() {
-		return amountDue;
+	public double getAmountPaid() {
+		return amountPaid;
 	}
 
-	public void setAmountDue(double amountDue) {
-		this.amountDue = amountDue;
+	public void setAmountPaid(double amountPaid) {
+		this.amountPaid = amountPaid;
 	}
 
-	public long getDueDate() {
-		return dueDate;
+	public long getDate() {
+		return date;
 	}
 
-	public void setDueDate(long dueDate) {
-		this.dueDate = dueDate;
+	public void setDate(long date) {
+		this.date = date;
+	}
+	
+	
+	public Payment() {
+		super();
+	}
+
+	public Payment(long bookingId, double amountPaid, long date) {
+		super();
+		this.bookingId = bookingId;
+		this.amountPaid = amountPaid;
+		this.date = date;
+	}
+
+	@Override
+	public String toString() {
+		return "Payment [bookingId=" + bookingId + ", amountPaid=" + amountPaid + ", date=" + date + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(amountDue, bookingId, dueDate);
+		return Objects.hash(amountPaid, bookingId, date);
 	}
 
 	@Override
@@ -73,13 +77,9 @@ public class Payment {
 		if (getClass() != obj.getClass())
 			return false;
 		Payment other = (Payment) obj;
-		return Double.doubleToLongBits(amountDue) == Double.doubleToLongBits(other.amountDue)
-				&& bookingId == other.bookingId && dueDate == other.dueDate;
+		return Double.doubleToLongBits(amountPaid) == Double.doubleToLongBits(other.amountPaid)
+				&& bookingId == other.bookingId && date == other.date;
 	}
 
-	@Override
-	public String toString() {
-		return "Payment [bookingId=" + bookingId + ", amountDue=" + amountDue + ", dueDate=" + dueDate + "]";
-	}
 	
 }

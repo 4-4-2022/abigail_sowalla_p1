@@ -8,14 +8,14 @@ import org.springframework.stereotype.Component;
 import com.EEStudyAbroad.models.Trip;
 
 @Component
-public class DummyData {
+public class TripData {
 
 	public List<Trip> trip;
 	
-	public DummyData() {
+	public TripData() {
 		trip=new ArrayList<>();
-		trip.add(new Trip(1, "Rome Romp", "Italy"));
-		trip.add(new Trip(2, "Buenos Aires Adventure", "Argentina"));
+		trip.add(new Trip(1, "Rome Romp", "Spring", 9999.89, "Italy"));
+		trip.add(new Trip(2, "Buenos Aires Adventure", "Summer", 2099.99, "Argentina"));
 	}
 	
 }

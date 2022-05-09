@@ -6,49 +6,56 @@ public class Trip {
 	
 	private long id;
 	private String name;
+	private String semester;
+	private double cost;
 	private String description;
-	
-	//constructor using fields
-	public Trip(long id, String name, String description) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.description = description;
-	}
-
-	public Trip() {
-		super();
-	}
-
 	public long getId() {
 		return id;
 	}
-
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	public String getSemester() {
+		return semester;
+	}
+	public void setSemester(String semester) {
+		this.semester = semester;
+	}
+	public double getCost() {
+		return cost;
+	}
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
 	public String getDescription() {
 		return description;
 	}
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	public Trip(long id, String name, String semester, double cost, String description) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.semester = semester;
+		this.cost = cost;
+		this.description = description;
+	}
+	@Override
+	public String toString() {
+		return "Trip [id=" + id + ", name=" + name + ", semester=" + semester + ", cost=" + cost + ", description="
+				+ description + "]";
+	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(description, id, name);
+		return Objects.hash(cost, description, id, name, semester);
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -58,12 +65,9 @@ public class Trip {
 		if (getClass() != obj.getClass())
 			return false;
 		Trip other = (Trip) obj;
-		return Objects.equals(description, other.description) && id == other.id && Objects.equals(name, other.name);
-	}
-
-	@Override
-	public String toString() {
-		return "Trip [id=" + id + ", name=" + name + ", description=" + description + "]";
+		return Double.doubleToLongBits(cost) == Double.doubleToLongBits(other.cost)
+				&& Objects.equals(description, other.description) && id == other.id && Objects.equals(name, other.name)
+				&& Objects.equals(semester, other.semester);
 	}
 	
 	

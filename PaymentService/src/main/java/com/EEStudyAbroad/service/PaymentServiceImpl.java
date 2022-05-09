@@ -21,33 +21,34 @@ public class PaymentServiceImpl implements PaymentService{
 		this.paymentRepository=paymentRepository;
 	}
 	
+	//the method to save a single payment
+	@WebMethod
+	public void save(Payment payment) {
+		this.paymentRepository.save(payment);
+	}
+	
+	@Override
+	public void save(Payment payment, Map<String, Integer> items) {
+	}
+	
+	//the method to find all payments
 	@Override
 	@WebMethod
 	public List<Payment> findAll(){
 		return this.paymentRepository.findAll();
 	}
 	
+	//the method to delete a payment record
+	@Override
 	@WebMethod
-	public void save(Payment payment) {
-		this.paymentRepository.save(payment);
+	public void delete(Payment payment){
+		this.paymentRepository.delete(payment);
 	}
+	
 	
 	@WebMethod
 	public void receiveMessage(String message) {
 		System.out.println(message);
 	}
 
-	@Override
-	public void save(Payment payment, Map<String, Integer> items) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/*
-	@Override
-	public void contactCupcakeService(String message) {
-		// TODO Auto-generated method stub
-		
-	}
-	*/
 }

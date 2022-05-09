@@ -8,6 +8,11 @@ import com.EEStudyAbroad.model.Payment;
 @Repository("paymentRepository")
 public interface PaymentRepository extends JpaRepository<Payment, Integer>{
 
-	<S extends Payment> S save(S entity);
+	//Iterable<Payment> findAll(); 
 	
+	<S extends Payment> S save(S entity);
+
+	//Optional<Payment> findById(ID primaryKey);
+	
+	void delete(Payment entity);
 }

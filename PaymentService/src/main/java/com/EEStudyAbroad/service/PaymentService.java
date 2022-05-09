@@ -12,6 +12,6 @@ public interface PaymentService {
 	
 	List<Payment> findAll();
 	void save(Payment payment, Map<String, Integer> items);
-	//void contactCupcakeService(String message);
+	void delete(Payment payment);
 
 }
