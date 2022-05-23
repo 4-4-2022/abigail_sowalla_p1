@@ -1,6 +1,6 @@
 # abigail_sowalla_p1
 ## Project Description
-"Enlightening Escapades Study Abroad Services" is an API for viewing, booking, and viewing payments on study abroad trips.
+"Enlightening Escapades Study Abroad Services" is an API for viewing, booking, and making payments on study abroad trips.
 
 This project is composed of two REST services and one SOAP service called by a public-facing REST client. One REST service handles trip data, another handles booking data, and the SOAP handles payment data.
 ## Technologies Used
